@@ -1,4 +1,4 @@
-size = 65536
+size = 200
 print('Just entered the matrix dynamic programming ...')
 dynamicProg = []
 for k in range(size):
@@ -17,6 +17,6 @@ def ackermannFunction(m, n):
             )
     return dynamicProg[m][n]
 for k in range(4):
-    for m in range(4):
+    for m in range(5):
         print('DynamicPBacker (',k,',',m,') ->',dynamicProg[k][m])
         print('FunctionBacker (',k,',',m,') ->',ackermannFunction(k,m))
