@@ -73,6 +73,7 @@ print(newMarrion.forest)
 for k in range(1,5):
     print('Unifying',2*k-1,'and',2*k)
     newMarrion.UnionByRank(2*k-1, 2*k)
+print(newMarrion.forest)
 from time import time
 for k in range(1,11):
     start = time()
