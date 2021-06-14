@@ -16,15 +16,13 @@ class disjointSetNew:
             self.forest[x]['size'] = 1
             self.forest[x]['rank'] = 0
     def Find(self, x):
-        root = self.forest[x]
-        while self.forest[root['parent']]!=self.forest[root]:
-            # This needs to be debugged ASAP ....
-            print('root->',root)
-            root = self.forest[root['parent']]
-        while self.forest[x]['parent']!= root:
+        root = x
+        while self.forest[root]['parent']!=root:
+            root = self.forest[root]['parent']
+        while self.forest[x]['parent']!=root:
             parent = self.forest[x]['parent']
             self.forest[x]['parent'] = root
-            self.forest[x] = parent
+            x = parent
         return root
     def UnionBySize(self,x,y):
         xRoot = self.Find(x)
@@ -35,7 +33,7 @@ class disjointSetNew:
         if self.forest[x]['size'] < self.forest[y]['size']:
             (self.forest[x],self.forest[y]) = (self.forest[y], \
                                                self.forest[x])
-        self.forest[y]['parent'] = self.forest[x]
+        self.forest[y]['parent'] = x
         self.forest[x]['size'] = self.forest[x]['size'] + \
             self.forest[y]['size']
     def UnionByRank(self,x,y):
@@ -47,7 +45,7 @@ class disjointSetNew:
         if self.forest[x]['rank'] < self.forest[y]['rank']:
             (self.forest[x],self.forest[y]) = (self.forest[y], \
                                                self.forest[x])
-        self.forest[y]['parent'] = self.forest[x]
+        self.forest[y]['parent'] = x
         self.forest[x]['rank'] = self.forest[x]['rank'] + 1
 
 # Some elementary basic checks whether they work with the code
@@ -70,6 +68,7 @@ newMarrion = disjointSetNew()
 for k in range(1,11):
     print('Adding k =',k,' to the set!')
     newMarrion.MakeSet(k)
+print(newMarrion.forest)
 for k in range(1,5):
     print('Unifying',2*k-1,'and',2*k)
     newMarrion.UnionBySize(2*k-1, 2*k)
