@@ -31,5 +31,5 @@ TUPLE_GEN := lambda M1,M2,M3,...,Mn,z. z M1 M2 M3 ... Mn
 REG_1 := QDFLIP CLOCK TUPLE_GEN 0100101000111001
 NIL := lambda x, y. y
 FOREST := lambda f. IFTHENELSE ISZERO SUB f NIL NIL f
-ITER_FIND := lambda x, f. IFTHENELSE ISZERO SUB x['parent'] x x x['parent'] = ITER_FIND(x['parent'])
-MAKE_SET := lambda x, f. 
+ITER_FIND := lambda f, x. IFTHENELSE ISZERO SUB x['parent'] x x x['parent'] = ITER_FIND(x['parent'])
+FIND := lambda x. (Y ITER_FIND) x MAKE_SET := lambda x, f. IFTHENELSE FIND x f TUPLE_GEN x 'parent'->x 'rank'->0 
